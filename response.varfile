@@ -1,0 +1,6 @@
+#install4j response file for JIRA Software 7.1.8
+#Wed Jun 22 08:05:08 UTC 2016
+executeLauncherAction$Boolean=true
+app.install.service$Boolean=true
+sys.languageId=en
+sys.installationDir=/opt/JIRA
