@@ -19,16 +19,12 @@ Vagrant::Config.run do |config|
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.network "forwarded_port", guest: 8080, host: 9191
+  config.vm.network "forwarded_port", guest: 8005, host: 8005
+  config.vm.network "forwarded_port", guest: 8080, host: 8081
   $script = <<SCRIPT
-sudo mkdir -p /opt/jbox/
-sudo mkdir -p /opt/jbox/script/
-sudo apt-get install -y git
-sudo echo 'alias jbox="/opt/jbox/script/jira-box/jbox"' >> ~/.profile
-sudo rm -rf /opt/jbox/script/jira-box
-cd /opt/jbox/script/
-sudo git clone https://bitbucket.org/atlassian/jira-box.git
-sudo chown vagrant:vagrant -R /opt/jbox/
+  wget https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-7.1.8-jira-7.1.8-x64.bin
+  chmod +x atlassian-jira-software-7.1.8-jira-7.1.8-x64.bin
+  sudo ./atlassian-jira-software-7.1.8-jira-7.1.8-x64.bin -q
 SCRIPT
 
       config.vm.provision :shell, :inline => $script
